@@ -30,9 +30,19 @@ public class ApplicationUserController {
         return new RedirectView("/");
     }
 
-    @GetMapping("login")
+    @GetMapping("/login")
     public String loginForm() {
         return "login";
+    }
+
+    @PostMapping("/login")
+    public RedirectView authententicatedUser(Principal p) {
+        if (p != null) {
+            ApplicationUser loggedUser = appUserRepo.findByUsername(p.getName());
+            return new RedirectView("/user/" + loggedUser.getId());
+        } else {
+            return new RedirectView("/login");
+        }
     }
 
     @GetMapping("/user/{id}")
