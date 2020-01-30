@@ -33,6 +33,10 @@ public class ApplicationUser implements UserDetails {
         this.bio = bio;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
