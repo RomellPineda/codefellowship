@@ -3,11 +3,9 @@ package io.romellpineda.codefellowship.models;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -21,6 +19,13 @@ public class ApplicationUser implements UserDetails {
     String lastName;
     String dateOfBirth;
     String bio;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "following_users",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "followed_id"))
+    private List<ApplicationUser> following;
 
     public ApplicationUser() {}
 
