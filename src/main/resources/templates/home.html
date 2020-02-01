@@ -1,25 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<header>
-    <nav>
-        <ul>
-            <li>
-                <h1>welcome to the fellowship [[${username}]]</h1>
-            </li>
-            <li>
-                <a href="/login">log in</a>
-            </li>
-            <li>
-                <a href="/sign-up">sign up</a>
-            </li>
-        </ul>
-    </nav>
-</header>
+<header th:insert="fragments/header.html :: header"></header>
+<a href="/login">log in</a>
+<a href="/sign-up">sign up</a>
 </body>
 </html>

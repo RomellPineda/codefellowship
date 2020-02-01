@@ -5,27 +5,30 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 public class ApplicationUser implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String username;
-    String password;
-    String firstName;
-    String lastName;
-    String dateOfBirth;
-    String bio;
+    private Long id;
+    public String username;
+    public String password;
+    public String firstName;
+    public String lastName;
+    public String dateOfBirth;
+    public String bio;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "following_users",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "followed_id"))
-    private List<ApplicationUser> following;
+            name = "follows",
+            joinColumns = @JoinColumn(name = "following_id"),
+            inverseJoinColumns = @JoinColumn(name = "followme_id"))
+    public Set<ApplicationUser> myFollowers;
+
+    @ManyToMany(mappedBy = "myFollowers")
+    public Set<ApplicationUser> iFollow;
 
     public ApplicationUser() {}
 

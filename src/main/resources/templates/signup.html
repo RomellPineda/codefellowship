@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+<header th:insert="fragments/header.html :: header"></header>
 <h2>free membership</h2>
 <form action="/join" method="POST">
     first name <input type="text" name="firstName">
     last name <input type="text" name="lastName">
-    date of birth <input type="text" name="dateOfBirth">
+    date of birth <input type="date" name="dateOfBirth">
     biography <input type="text" name="bio">
     <br>
     username <input type="text" name="username">
