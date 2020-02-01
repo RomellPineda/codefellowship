@@ -34,22 +34,12 @@ public class ApplicationUserController {
     public String loginForm() {
         return "login";
     }
+    
 
-    @PostMapping("/login")
-    public RedirectView authententicatedUser(Principal p) {
-        if (p != null) {
-            ApplicationUser loggedUser = appUserRepo.findByUsername(p.getName());
-            return new RedirectView("/user/" + loggedUser.getId());
-        } else {
-            return new RedirectView("/login");
-        }
-    }
-
-    @GetMapping("/user/{id}")
-    public String userDetails(@PathVariable Long id, Principal p, Model m) {
-        ApplicationUser user = appUserRepo.findById(id).get();
-        m.addAttribute("username", user.getUsername());
-        m.addAttribute("principal", p.getName());
+    @GetMapping("/userPage")
+    public String userDetails(Principal p, Model m) {
+        ApplicationUser authenticatedUser = appUserRepo.findByUsername(p.getName());
+        m.addAttribute("principal", authenticatedUser);
         return "userPage";
     }
 }
