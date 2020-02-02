@@ -65,4 +65,22 @@ public class ApplicationUserController {
         postRepo.save(userPost);
         return new RedirectView("/myprofile");
     }
+
+    @GetMapping("/userPage/{id}")
+    public String otherUserPage(@PathVariable Long id, Model m) {
+        ApplicationUser otherUser = appUserRepo.findById(id).get();
+        m.addAttribute("member", otherUser);
+        return "otherUser";
+    }
+
+    @PostMapping("/follow")
+    public String followMember(Principal p, Model m, String username) {
+        ApplicationUser loggedUser = appUserRepo.findByUsername(p.getName());
+        ApplicationUser otherUser = appUserRepo.findByUsername(username);
+        loggedUser.iFollow.add(otherUser);
+//        appUserRepo.save(loggedUser);
+        m.addAttribute("following", loggedUser.iFollow);
+        System.out.println(loggedUser.iFollow);
+        return "feed";
+    }
 }
