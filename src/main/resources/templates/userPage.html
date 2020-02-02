@@ -13,12 +13,11 @@
 <!--form-->
 <form action="/user/post" method="POST">
     post body <input type="text" name="body">
-    <input type="text" name="lastName">
     <input type="submit">
 </form>
 <h2>my posts</h2>
 <ul th:each="post : ${principal.posts}">
-    <li>[[${post.body}]]</li>
+    <li th:text="${post.body}"></li>
 </ul>
 </body>
 </html>

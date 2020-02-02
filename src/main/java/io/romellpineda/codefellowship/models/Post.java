@@ -1,6 +1,7 @@
 package io.romellpineda.codefellowship.models;
 
 import javax.persistence.*;
+import java.security.Principal;
 import java.util.Date;
 
 @Entity
@@ -9,7 +10,7 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String body;
+    public String body;
 
     @ManyToOne(fetch = FetchType.LAZY)
     ApplicationUser user;
@@ -24,6 +25,11 @@ public class Post {
         this.user = user;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+
+    public Post(ApplicationUser user, String body) {
+        this.body = body;
+        this.user = user;
     }
 
     public Long getId() {
@@ -46,7 +52,6 @@ public class Post {
         this.body = body;
     }
 
-    // May need to convert to java.sql Date to circumvent possible db errors
     @PrePersist
     protected void onCreate(){
         this.createdAt = new Date();

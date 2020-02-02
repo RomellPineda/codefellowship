@@ -2,6 +2,8 @@ package io.romellpineda.codefellowship.controllers;
 
 import io.romellpineda.codefellowship.models.ApplicationUser;
 import io.romellpineda.codefellowship.models.ApplicationUserRepository;
+import io.romellpineda.codefellowship.models.Post;
+import io.romellpineda.codefellowship.models.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,9 @@ public class ApplicationUserController {
 
     @Autowired
     ApplicationUserRepository appUserRepo;
+
+    @Autowired
+    PostRepository postRepo;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -55,7 +60,9 @@ public class ApplicationUserController {
 
     @PostMapping("/user/post")
     public RedirectView recordPost(Principal p, String body) {
-        System.out.println(body);
+        ApplicationUser user = appUserRepo.findByUsername(p.getName());
+        Post userPost = new Post(user, body);
+        postRepo.save(userPost);
         return new RedirectView("/myprofile");
     }
 }
