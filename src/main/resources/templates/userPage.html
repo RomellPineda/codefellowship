@@ -9,5 +9,15 @@
 <header th:insert="fragments/header.html :: header"></header>
 <h1>your codefellowship page</h1>
 <p th:text="${principal.bio}"></p>
+<h2>creat a post</h2>
+<!--form-->
+<form action="/user/post" method="POST">
+    post body <input type="text" name="body">
+    <input type="submit">
+</form>
+<h2>my posts</h2>
+<ul th:each="post : ${principal.posts}">
+    <li th:text="${post.body}"></li>
+</ul>
 </body>
 </html>
