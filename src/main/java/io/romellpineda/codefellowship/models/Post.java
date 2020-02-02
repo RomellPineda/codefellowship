@@ -11,7 +11,7 @@ public class Post {
     private Long id;
     private String body;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     ApplicationUser user;
 
     private Date createdAt;
