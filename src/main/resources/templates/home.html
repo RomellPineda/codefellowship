@@ -9,5 +9,13 @@
 <header th:insert="fragments/header.html :: header"></header>
 <a href="/login">log in</a>
 <a href="/sign-up">sign up</a>
+<br>
+<h2>Discover other users</h2>
+<div th:each="member : ${members}">
+    <a th:href="@{'/userPage/' + ${member.getId()}}">
+        <p th:text="${member.username}"></p>
+    </a>
+</div>
+<h2></h2>
 </body>
 </html>
